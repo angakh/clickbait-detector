@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clickbait Detector</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Clickbait Detector</h1>
+    </header>
+    
+    <!-- Loading spinner -->
+    <div id="loading" class="loading">
+      <div class="spinner"></div>
+      <p>Analyzing page...</p>
+    </div>
+    
+    <!-- Error message -->
+    <div id="error" class="error hidden">
+      <div class="error-icon">❌</div>
+      <h2>Error</h2>
+      <p id="error-message">Could not connect to local LLM.</p>
+      <button id="retry-button" class="button">Retry</button>
+    </div>
+    
+    <!-- Analysis results -->
+    <div id="results" class="results hidden">
+      <div id="verdict-container" class="verdict-container">
+        <div id="verdict-icon" class="verdict-icon"></div>
+        <h2 id="verdict">Analyzing...</h2>
+      </div>
+      <div class="explanation">
+        <h3>Explanation:</h3>
+        <p id="explanation-text">Please wait...</p>
+      </div>
+      <button id="refresh-button" class="button">Refresh Analysis</button>
+    </div>
+    
+    <!-- Settings panel -->
+    <div class="settings-container">
+      <button id="settings-toggle" class="button settings-button">⚙️ Settings</button>
+      
+      <div id="settings-panel" class="settings-panel hidden">
+        <h3>LLM Provider</h3>
+        <div class="radio-group">
+          <label>
+            <input type="radio" name="provider" value="ollama" checked>
+            Ollama
+          </label>
+          <label>
+            <input type="radio" name="provider" value="koboldai">
+            KoboldAI
+          </label>
+        </div>
+        
+        <!-- Ollama settings -->
+        <div id="ollama-settings">
+          <h4>Ollama Settings</h4>
+          <div class="form-group">
+            <label for="ollama-url">Server URL:</label>
+            <input type="text" id="ollama-url" value="http://localhost:11434">
+          </div>
+          <div class="form-group">
+            <label for="ollama-model">Model:</label>
+            <select id="ollama-model">
+              <option value="llama2">llama2</option>
+              <option value="mistral">mistral</option>
+              <!-- Will be populated dynamically -->
+            </select>
+            <button id="refresh-models" class="small-button">↻</button>
+          </div>
+          <div class="form-group">
+            <label for="ollama-temperature">Temperature:</label>
+            <input type="range" id="ollama-temperature" min="0" max="1" step="0.1" value="0.3">
+            <span id="ollama-temperature-value">0.3</span>
+          </div>
+        </div>
+        
+        <!-- KoboldAI settings -->
+        <div id="koboldai-settings" class="hidden">
+          <h4>KoboldAI Settings</h4>
+          <div class="form-group">
+            <label for="koboldai-url">Server URL:</label>
+            <input type="text" id="koboldai-url" value="http://localhost:5001">
+          </div>
+          <div class="form-group">
+            <label for="koboldai-temperature">Temperature:</label>
+            <input type="range" id="koboldai-temperature" min="0" max="1.5" step="0.1" value="0.7">
+            <span id="koboldai-temperature-value">0.7</span>
+          </div>
+        </div>
+        
+        <div class="settings-actions">
+          <button id="test-connection" class="button">Test Connection</button>
+          <button id="save-settings" class="button primary">Save Settings</button>
+        </div>
+      </div>
+    </div>
+    
+    <footer>
+      <p>Using local LLM for analysis</p>
+    </footer>
+  </div>
+  
+  <script src="popup.js" type="module"></script>
+</body>
+</html>

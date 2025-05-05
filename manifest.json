@@ -1,0 +1,46 @@
+{
+    "manifest_version": 3,
+    "name": "Clickbait Detector",
+    "version": "1.0.0",
+    "description": "Detects clickbait by comparing page titles with content using local LLMs like Ollama or KoboldAI",
+    "permissions": [
+      "activeTab",
+      "storage",
+      "scripting",
+      "contextMenus",
+      "notifications",
+      "tabs"
+    ],
+    "host_permissions": [
+      "http://localhost/*"
+    ],
+    "action": {
+      "default_popup": "popup/popup.html",
+      "default_icon": {
+        "16": "images/icon-16.png",
+        "48": "images/icon-48.png",
+        "128": "images/icon-128.png"
+      }
+    },
+    "background": {
+      "service_worker": "background.js",
+      "type": "module"
+    },
+    "content_scripts": [
+      {
+        "matches": ["<all_urls>"],
+        "js": ["content/content.js"]
+      }
+    ],
+    "icons": {
+      "16": "images/icon-16.png",
+      "48": "images/icon-48.png",
+      "128": "images/icon-128.png"
+    },
+    "web_accessible_resources": [
+      {
+        "resources": ["setup/setup.html", "setup/setup.js", "setup/setup.css"],
+        "matches": ["<all_urls>"]
+      }
+    ]
+  }

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clickbait Detector Setup</title>
+  <link rel="stylesheet" href="setup.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Clickbait Detector Setup</h1>
+      <p class="subtitle">Configure your local LLM connection</p>
+    </header>
+
+    <div class="progress-bar">
+      <div class="progress-step active" data-step="1">1</div>
+      <div class="progress-line"></div>
+      <div class="progress-step" data-step="2">2</div>
+      <div class="progress-line"></div>
+      <div class="progress-step" data-step="3">3</div>
+    </div>
+
+    <!-- Step 1: Welcome and explanation -->
+    <div class="setup-step active" data-step="1">
+      <h2>Welcome to Clickbait Detector!</h2>
+      <p>This extension uses a local Large Language Model (LLM) to analyze web pages and detect clickbait titles.</p>
+      
+      <div class="info-box">
+        <div class="info-icon">ℹ️</div>
+        <div class="info-content">
+          <p><strong>Before continuing, you need to have one of these LLMs running on your computer:</strong></p>
+          <ul>
+            <li><a href="https://ollama.ai" target="_blank">Ollama</a> - Recommended, easy to set up</li>
+            <li><a href="https://github.com/KoboldAI/KoboldAI-Client" target="_blank">KoboldAI</a> - Alternative option</li>
+          </ul>
+        </div>
+      </div>
+
+      <p>If you already have an LLM running, click Next to continue setup.</p>
+      <p>If not, please install and start one of the supported LLMs first.</p>
+
+      <div class="button-group">
+        <button id="next-1" class="button primary">Next</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Select LLM provider -->
+    <div class="setup-step" data-step="2">
+      <h2>Select your LLM Provider</h2>
+      <p>Choose which local LLM you want to use for clickbait detection:</p>
+
+      <div class="provider-options">
+        <div class="provider-option" data-provider="ollama">
+          <div class="provider-header">
+            <input type="radio" name="provider" id="ollama" value="ollama" checked>
+            <label for="ollama">Ollama</label>
+          </div>
+          <div class="provider-details">
+            <p>Recommended option. Runs locally with good performance.</p>
+            <div class="form-group">
+              <label for="ollama-url">Server URL:</label>
+              <input type="text" id="ollama-url" value="http://localhost:11434">
+            </div>
+            <div class="form-group">
+              <label for="ollama-model">Model:</label>
+              <select id="ollama-model">
+                <option value="llama2">llama2</option>
+                <option value="mistral">mistral</option>
+              </select>
+              <button id="refresh-models" class="small-button">↻</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="provider-option" data-provider="koboldai">
+          <div class="provider-header">
+            <input type="radio" name="provider" id="koboldai" value="koboldai">
+            <label for="koboldai">KoboldAI</label>
+          </div>
+          <div class="provider-details">
+            <p>Alternative option with customizable models.</p>
+            <div class="form-group">
+              <label for="koboldai-url">Server URL:</label>
+              <input type="text" id="koboldai-url" value="http://localhost:5001">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button id="back-2" class="button">Back</button>
+        <button id="next-2" class="button primary">Next</button>
+      </div>
+    </div>
+
+    <!-- Step 3: Test connection and complete setup -->
+    <div class="setup-step" data-step="3">
+      <h2>Finalize Setup</h2>
+      <p>Let's test your LLM connection to make sure everything is working:</p>
+
+      <div class="connection-test">
+        <button id="test-connection" class="button">Test Connection</button>
+        <div id="test-result" class="hidden">
+          <div id="test-success" class="test-indicator">
+            <span class="success-icon">✓</span> Connection successful!
+          </div>
+          <div id="test-error" class="test-indicator hidden">
+            <span class="error-icon">✗</span> 
+            <span id="error-message">Connection failed. Please check your settings.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="setup-options">
+        <div class="form-group checkbox">
+          <input type="checkbox" id="auto-analyze" checked>
+          <label for="auto-analyze">Automatically analyze pages when they load</label>
+        </div>
+        
+        <div class="form-group checkbox">
+          <input type="checkbox" id="show-notifications" checked>
+          <label for="show-notifications">Show notifications for detected clickbait</label>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button id="back-3" class="button">Back</button>
+        <button id="complete-setup" class="button primary">Complete Setup</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="setup.js" type="module"></script>
+</body>
+</html>
